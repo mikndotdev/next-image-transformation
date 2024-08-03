@@ -12,18 +12,14 @@ Bun.serve({
     async fetch(req) {
         const url = new URL(req.url);
         if (url.pathname === "/") {
-            return new Response(`<h3>Next Image Transformation v${version}</h3>More info <a href="https://github.com/coollabsio/next-image-transformation">https://github.com/coollabsio/next-image-transformation</a>.`, {
-                headers: {
-                    "Content-Type": "text/html",
-                },
-            });
+            return Response.redirect("https://mikn.dev/solutions/images", 302);
         }
 
         if (url.pathname === "/health") {
             return new Response("OK");
         };
         if (url.pathname.startsWith("/image/")) return await resize(url);
-        return Response.redirect("https://github.com/coollabsio/next-image-transformation", 302);
+        return Response.redirect("https://mikn.dev/solutions/images", 302);
     }
 });
 
@@ -38,7 +34,7 @@ async function resize(url) {
         return false;
     })
     if (allowed.length === 0) {
-        return new Response(`Domain (${origin}) not allowed. More details here: https://github.com/coollabsio/next-image-transformation`, { status: 403 });
+        return new Response(`Domain (${origin}) not allowed.`, { status: 403 });
     }
     const width = url.searchParams.get("width") || 0;
     const height = url.searchParams.get("height") || 0;
