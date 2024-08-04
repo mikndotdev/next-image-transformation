@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "development") {
 allowedDomains = allowedDomains.map(d => d.trim());
 
 Bun.serve({
-    port: 3000,
+    port: process.env.PORT || 3000,
     async fetch(req) {
         const url = new URL(req.url);
         if (url.pathname === "/") {
@@ -48,6 +48,7 @@ async function resize(url) {
         })
         const headers = new Headers(image.headers);
         headers.set("Server", "NextImageTransformation");
+        headers.set("Content-Encoding", "zstd");
         return new Response(image.body, {
             headers
         })
