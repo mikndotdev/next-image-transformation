@@ -48,7 +48,6 @@ async function resize(url) {
         })
         const headers = new Headers(image.headers);
         headers.set("Server", "NextImageTransformation");
-        headers.set("Content-Encoding", "zstd");
         return new Response(image.body, {
             headers
         })
