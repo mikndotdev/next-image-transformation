@@ -49,6 +49,7 @@ async function resize(url) {
         })
         const headers = new Headers(image.headers);
         headers.set("Server", "MikanDev-Images");
+        headers.set("X-Powered-By", "MikanDev-Images");
         headers.delete("Content-Length");
         headers.delete("Transfer-Encoding");
         return new Response(image.body, {
